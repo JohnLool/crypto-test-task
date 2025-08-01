@@ -1,4 +1,3 @@
-from __future__ import annotations
 from datetime import datetime
 from decimal import Decimal
 from typing import Any
@@ -6,9 +5,12 @@ from typing import Any
 from pydantic import BaseModel, Field, ConfigDict, field_validator
 
 
-class WalletLog(BaseModel):
-    id: int
+class WalletAddressRequest(BaseModel):
     wallet_address: str = Field(..., max_length=64)
+
+
+class WalletLog(WalletAddressRequest):
+    id: int
     trx_balance: Decimal = Field(...)
     bandwidth: int
     energy: int
@@ -18,7 +20,7 @@ class WalletLog(BaseModel):
 
     @field_validator("trx_balance", mode="before")  # noqa
     @classmethod
-    def ensure_decimal(cls, v: Any):
-        if isinstance(v, float) or isinstance(v, str):
+    def ensure_decimal(cls, v: Any) -> Decimal:
+        if not isinstance(v, Decimal):
             return Decimal(str(v))
         return v

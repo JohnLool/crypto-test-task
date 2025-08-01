@@ -11,7 +11,7 @@ class WalletLogOrm(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     wallet_address: Mapped[str] = mapped_column(String(64), nullable=False, index=True)
     trx_balance: Mapped[Decimal] = mapped_column(
-        Numeric(precision=30, scale=8), nullable=False
+        Numeric(precision=30, scale=7), nullable=False
     )
     bandwidth: Mapped[int] = mapped_column(Integer, nullable=False)
     energy: Mapped[int] = mapped_column(Integer, nullable=False)

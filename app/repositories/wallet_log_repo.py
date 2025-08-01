@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import select, desc
 from app.models.wallet_log import WalletLogOrm
 from app.repositories.abstract_repo import AbstractRepository
-from app.logger import logger
+from app.utils.logger import logger
 
 
 class WalletLogRepository(AbstractRepository[WalletLogOrm]):

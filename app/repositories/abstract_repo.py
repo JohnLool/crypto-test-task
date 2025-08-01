@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Generic, TypeVar, List
+from typing import Generic, TypeVar
 
 T = TypeVar("T")
 
@@ -10,5 +10,5 @@ class AbstractRepository(ABC, Generic[T]):
         pass
 
     @abstractmethod
-    async def get_list(self, *, offset: int = 0, limit: int = 100) -> List[T]:
+    async def get_list(self, *, offset: int = 0, limit: int = 100) -> list[T]:
         pass
