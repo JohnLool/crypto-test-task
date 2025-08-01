@@ -1,6 +1,6 @@
 from app.repositories.wallet_log_repo import WalletLogRepository
 from app.schemas.wallet_log import WalletLog
-from app.utils.tron import get_wallet_info
+import app.utils.tron as tron_utils
 
 
 class WalletLogService:
@@ -8,7 +8,7 @@ class WalletLogService:
         self.repo = repo
 
     async def create_wallet_log(self, address: str) -> WalletLog:
-        wallet_data = await get_wallet_info(address)
+        wallet_data = await tron_utils.get_wallet_info(address)
         wallet_data["wallet_address"] = address
         wallet_log_orm = await self.repo.add(wallet_data)
         return WalletLog.model_validate(wallet_log_orm)
